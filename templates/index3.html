@@ -1,0 +1,56 @@
+{% extends "navbar2.html" %}
+{% block body %}
+
+<style type="text/css">
+	body {
+
+	background: url(/static/background1.jpg) no-repeat center center fixed;
+	background-position: 50% 50%;
+	background-height: 100%;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	}
+
+	.container {
+	background-color: rgba(0,0,0, 0.5);
+	color:white;
+	text-align: left;
+	}
+	.hero-unit {
+	background: none;
+	}
+	.imgborder {
+	border-width: 2px;
+	border-color: Black;
+	}
+</style>
+
+
+<div class="container">
+  <div class="hero-unit" id="splashtext">
+    <h1>Bereket Abraham</h1>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<br>
+			<p>Hi, I'm an Associate Technical Consultant for <a href="http://www.appnexus.com/">AppNexus</a>. I graduated in 2013 from Princeton University, where I studied Mechanical Engineering, Computer Science, and Applied Maths. I'm fascinated by the connection between computing and engineering, both in the classroom and in the workplace.</p>
+			<br>
+			<a href="/project/"><p>Check out some of my featured projects --></p></a>
+
+	        </div>
+		<div class="span5 offset1">
+			<a href="/project/6/"><img src="/media/3d_display.jpg" alt="3D Volumetric Display"/></a>
+			<br>
+			<a href="/project/1/"><img src="/media/vortex_street.png" alt="Lagrangian Coherent Structures" /></a>
+		</div>
+	</div>
+  </div>
+
+
+
+</div> <!-- /container -->
+
+{% endblock %}

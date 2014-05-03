@@ -1,0 +1,18 @@
+{% extends "navbar2.html" %}
+{% block body %}
+
+<div class="container">
+
+<br/>
+<br/>
+<br/>
+<h1>Enter in the secret key to begin interacting with your LED Table. Cheers!</h1>
+<br/>
+
+<form action="/lab/" method="post">
+	{{ form.as_p }}
+	<input class="btn btn-success" type="submit" value="Submit" />
+</form>
+
+</div>
+{% endblock %}

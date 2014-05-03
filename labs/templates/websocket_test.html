@@ -1,0 +1,24 @@
+{% extends "navbar2.html" %}
+{% block body %}
+
+<br />
+<h2 id="words">Hi! This is the start of the websockets test.</h2>
+<br />
+<h3 id="words2">empty</h3>
+
+<br />
+<p><button type="button" id="connect">Connect to Server</button></p>
+<br />
+<p><button type="button" id="send">Send Data</button></p>
+<br />
+<p><button type="button" id="sendjson">Send JSON</button></p>
+<br />
+<p><button type="button" id="close">Close</button></p>
+
+<script type="text/javascript">
+  var ip = {{ ip }};
+</script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="/static/websocket_test.js"></script>
+
+{% endblock %}

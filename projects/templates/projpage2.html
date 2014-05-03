@@ -1,0 +1,42 @@
+{% extends "navbar2.html" %}
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="speaker">
+			<h1>{{ proj.title }}</h1>
+			<h3><i>{{ proj.subtitle }}</i></h3>
+			<b>Completion Date: {{ proj.comp_date }}</b>
+		</div>
+	</div>
+	<div class="row">
+		<div class="span6">
+			<br>
+			<p>{{ proj.description }}</p>
+			<br>
+			<p>{{ proj.tech_skills }}</p>
+			<br>
+
+			{% for link in proj.link_set.all %}
+			<h3><a href="{{ link.address }}" target="_blank">{{ link.title }}</a></h3>
+			<br>
+			{% endfor %}
+
+		</div>
+
+		<div class="span5 offset1">
+			{% for video in proj.video_set.all %}
+			<iframe width="420" height="315" src="{{ video.embed }}" frameborder="0" rel="0" allowfullscreen></iframe>
+			<br>
+			{% endfor %}
+
+			{% for picture in proj.picture_set.all %}
+			<img src="/media/{{ picture.address }}" alt="{{ picture.title }}"/>
+			<br>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+

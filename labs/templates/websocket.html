@@ -1,0 +1,41 @@
+{% extends "navbar2.html" %}
+{% block body %}
+
+<br />
+<h1>{{ table.title }}</h1>
+<br />
+<h3>Messages: <span id="words"></span></h3>
+<br />
+<h3>Incoming data: <span id="words2"></span></h3>
+
+<br />
+<p>
+	<button class="btn btn-primary" id="connect" style="margin-right:20px">Connect to Server</button>
+	<button class="btn btn-danger" id="close">Close</button>
+</p>
+<br />
+
+<textarea class="span12" id="data_input" rows="6">
+000:FF0000 001:00FF00 002:0000FF
+</textarea>
+
+<p>
+	<button class="btn btn-default" id="mode1" style="padding-right:10px">Mode 1</button>
+	<button class="btn btn-default" id="mode2" style="padding-right:10px">Mode 2</button>
+	<button class="btn btn-default" id="mode3" style="padding-right:10px">Mode 3</button>
+	<button class="btn btn-default" id="mode4" style="padding-right:10px">Mode 4</button>
+</p>
+<br />
+<p><button class="btn btn-success" id="send">Send Data</button></p>
+
+
+<script type="text/javascript">
+	// transfer data from django to javascript
+	var data = {};
+	data.ip = "{{ table.ip }}";
+	data.port = "{{ table.port }}";
+</script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="/static/websocket.js"></script>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "navbar2.html" %}
+{% block body %}
+
+<div class="container">
+
+{% if latest_proj_list %}
+	{% for proj in latest_proj_list %}
+		<div class="row">
+			<div class="span10">
+				<h2><a href="/project/{{ proj.id }}/">{{ proj.title }}</a></h2>
+				<h3>{{ proj.subtitle }}</h3>
+			</div>
+		</div>
+	{% endfor %}
+
+{% else %}
+	<br>
+	<p>This site is currently under construction.</p>
+{% endif %}
+
+</div>
+
+{% endblock %}

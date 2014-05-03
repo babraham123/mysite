@@ -1,0 +1,21 @@
+{% extends "navbar2.html" %}
+{% block body %}
+
+<div class="container">
+
+<!-- Posts  -->
+    <div class="title">
+        <h3>{{ post.title }}</h3>
+    </div>
+    <ul>
+        <div class="time">
+            <p><em>{{ post.created }}</em></p>
+        </div>
+        <div class="body">
+            <pre>{{ post.body }}</pre>
+        </div>
+    </ul>
+
+</div>
+
+{% endblock %}
