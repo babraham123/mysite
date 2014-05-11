@@ -1,0 +1,17 @@
+backup/
+out/
+tmp/
+*.tsv
+*.csv
+*.pyc
+*.log
+*.swp
+*.swo
+working/
+log_conf.py
+*.xls
+*.xlsx
+logs/
+*~
+*#
+config
