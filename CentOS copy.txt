@@ -1,0 +1,275 @@
+CloudAtCost
+gmail, libro de cabezas
+IP: 162.244.25.50
+pswrd: ezYTATE8y7
+Console: https://panel.cloudatcost.com
+login: gmail
+babraham user, libro de cabezas
+
+MYSQL
+'USER': root,              
+'PASSWORD': libro de cabezas
+
+'mysitedb',
+'USER': 'mysiteuser',              
+'PASSWORD': 'dbpass'
+
+Django superuser:
+babraham
+babraham42@gmail.com
+libro de cabezas
+
+CloudAtCost being retarded
+rm -rf /etc/cron.daily/*
+echo 600 > /sys/block/sda/device/timeout
+echo 600 > /sys/block/sr0/device/timeout
+echo 'echo 600 > /sys/block/sda/device/timeout' >> /etc/rc.local
+echo 'echo 600 > /sys/block/sr0/device/timeout' >> /etc/rc.local
+
+
+Below is a step by step account of how to set up a django (1.6) web application on a CentOS (6.4) server, running Apache (2.5) and python (2.6, 2.7)
+
+1. Login as root and set up a new user
+
+ssh root@[ip address]
+	(you probably want to eventually disable root login)
+
+useradd myuser
+	(create user)
+
+passwd myuser
+	(type in your password twice)
+
+usermod -a -G wheel myuser
+	(add user to a sudo enabled group)
+
+visudo -f /etc/sudoers
+	(allow the wheel group to use sudo by editing the shudders file)
+	(press i, uncomment the 2nd line, then press ESC, shift ZZ)
+——-----------------
+## Allows people in group wheel to run all commands
+# %wheel        ALL=(ALL)       ALL
+------------------
+
+exit
+
+2. Login without typing in your password (not strictly necessary)
+(cite #7) http://wiki.centos.org/HowTos/Network/SecuringSSH
+
+(only your local machine)
+ssh-keygen -t rsa
+	(generate public/private key)
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/id_rsa
+	(set permissions on your private key)
+
+scp ~/.ssh/id_rsa.pub myuser@[ip address]:/home/myuser
+	(copy your public key onto remote server)
+
+ssh myuser@[ip address]
+	(on remote machine)
+
+mkdir ~/.ssh
+touch ~/.ssh/authorized_keys
+	(create if they don't already exist)
+
+cat id_rsa.pub >> ~/.ssh/authorized_keys
+rm id_rsa.pub
+	(add public key to authorized list)
+
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
+3. Install necessary packages. Since this is for CentOS, we yum.
+(cite) http://itekblog.com/django-centos-6-4/
+
+cat /etc/redhat-release
+	(check centos version. these cmds are for centos 6.4)
+
+su
+cd /opt/
+wget http://mirrors.nl.eu.kernel.org/fedora-epel/6/i386/epel-release-6-8.noarch.rpm
+rpm -Uvh epel-release-6-8.noarch.rpm
+rm epel-release-6-8.noarch.rpm -f
+	(add the EPEL repositories to get Django)
+
+yum upgrade
+yum install python
+	(should be 2.6.6)
+yum install sqlite
+yum install mod_wsgi
+yum install mysql mysql-server
+
+yum install python-pip
+pip install Django==1.6
+	(1.6 or whatever version you want)
+yum -y install mysql-devel
+yum install MySQL-python
+
+
+python
+>>> import django
+>>> print django.get_version()
+>>> quit()
+	(test to see if it downloaded properly)
+exit 
+	(out of su)
+
+4. Django
+
+django-admin.py startproject mysite
+cd mysite
+
+(Add all of application specific code. For beginners, use this tutorial)
+(cite) https://docs.djangoproject.com/en/1.6/intro/tutorial01/
+
+5. Set up mod_wsgi (A python library for Apache). For testing, you can skip this and just use the development server that comes with django (instead of Apache).
+
+su
+emacs /etc/httpd/conf.d/wsgi.conf
+	(integrate django and apache)
+
+----------------------
+LoadModule wsgi_module modules/mod_wsgi.so
+
+<VirtualHost *:80>
+  ServerName www.mywebsite.com
+  ServerAlias mywebsite.com
+  ServerAdmin webmaster@mywebsite.com
+
+  Alias /static/admin/ /usr/lib/python2.6/site-packages/django/contrib/admin/static/admin/
+  Alias /robots.txt /home/username/mysite/static/robots.txt
+  Alias /favicon.ico /home/username/mysite/static/favicon.ico
+  AliasMatch ^/([^/]*\.css) /home/username/mysite/static/styles/$1
+
+  Alias /media/ /home/username/mysite/media/
+  <Directory /home/username/mysite/media>
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+  Alias /static/ /home/username/mysite/static/
+  <Directory /home/username/mysite/static>
+    Order deny,allow
+    Allow from all
+  </Directory>
+
+#  WSGIDaemonProcess mywebsite.com python-path=/home/username/mysite:/usr/lib/python2.6/
+#  WSGIProcessGroup mywebsite.com
+
+  WSGIScriptAlias / /home/username/mysite/mysite/wsgi.py
+
+  <Directory /home/username/mysite/mysite>
+    <Files wsgi.py>
+#      WSGIProcessGroup mywebsite.com
+      Order allow,deny
+      Allow from all
+    </Files>
+  </Directory>
+
+</VirtualHost>
+----------------------
+	(this was especially tricky, so I included the entire file)
+
+apachectl start
+apachectl stop
+apachectl restart
+httpd -v
+	(apache commands)
+	(restart Apache after changing config files)
+
+emacs /var/www/html/index.html
+	(test apache)
+
+6. Create a mysql database (or skip this and use mysqlite)
+
+chkconfig --levels 235 mysqld on
+/etc/init.d/mysqld start
+mysql_secure_installation
+	(get mysql working, choose a password)
+
+mysql -u root -p
+>> create database mysitedb;
+>> GRANT ALL PRIVILEGES ON mysitedb.* To 'user'@'localhost' IDENTIFIED BY 'password';
+>> quit;
+	(create a new mysql user)
+
+exit (su)
+emacs ~/mysite/mysite/settings.py
+	(add the details to your settings file)
+
+--------------------
+ALLOWED_HOSTS = ['my.server.ip.address']
+
+DATABASES = {
+    'default': {
+        # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.                                        
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mysitedb',
+        'USER': 'mysiteuser',
+        'PASSWORD': 'password',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, "templates"),
+)
+--------------------
+	(add snippets)
+	(each app must have a subdirectory for its templates)
+
+cd ~/mysite/
+python manage.py syncdb
+	(create Djago super user too)
+python manage.py sql [name of app] (if you have any apps)
+python manage.py syncdb
+	(have python create mysql tables)
+
+python manage.py runserver
+	(start django server if using development server, not apache)
+
+sudo apachectl restart
+	(or, if that fails try this version)
+	/sbin/service httpd restart
+
+7. If you get 403 permission denied errors
+
+emacs mysite/wsgi.py
+
+______________________
+import sys
+sys.path.append('/home/username')
+sys.path.append('/home/username/mysite')
+______________________
+	(add snippet to the top of the file)
+
+
+(Restart apache and check website)
+
+(cite) http://blog.endpoint.com/2010/02/selinux-httpd-modwsgi-26-rhel-centos-5.html
+	(problems with SELinux)
+
+su
+setsebool -P httpd_can_network_connect on
+setsebool -P httpd_enable_homedirs on
+setsebool -P httpd_can_sendmail on
+restorecon -vR /etc/httpd
+
+
+(Restart apache and check website)
+
+(cite) http://code.google.com/p/modwsgi/wiki/WhereToGetHelp?tm=6#Conference_Presentations
+	(config problems on CentOS)
+
+chmod o+rx /home/username/
+chmod o+rx /home/username/mysite/
+chmod o+rx /home/username/mysite/mysite/
+chmod o+rx /home/username/mysite/mysite/wsgi.py
+restorecon -vR /etc/httpd
+
+(Restart apache and check website)
+
+exit
