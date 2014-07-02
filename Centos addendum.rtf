@@ -4,7 +4,7 @@
 \margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0\fs24 \cf0 sudo chmod 755 /home/babraham/mysite\
+\f0\fs24 \cf0 sudo chmod 755 /home/username/mysite\
 \
 sudo pip install gunicorn\
 \
@@ -20,21 +20,85 @@ user              nginx;\
 worker_processes  1;\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+	(set the number of worker_processes and the user to run as)\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 vi /etc/nginx/conf.d/mysite.conf\
 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+# virtual host using mix of IP-, name-, and port-based configuration\
+# from the django app, mysite, running on gunicorn\
+\
 server \{\
     listen       80;\
 #    listen       someip:8080;\
-    server_name  bereketabraham.com;\
+    server_name  sitename.com;\
+\
+    access_log  /var/log/nginx/mysite.log;\
 \
     location / \{\
-        root   /home/babraham/mysite/;\
-        index  index.html index.htm;\
+        proxy_set_header Host $http_host;\
+        proxy_set_header X-Forwarded-Host $server_name;\
+        proxy_set_header X-Real-IP $remote_addr;\
+        proxy_pass http://127.0.0.1:8001;\
     \}\
+\
+    location /media/ \{\
+        root /home/username/mysite/media;\
+    \}\
+\
+    location /static/ \{\
+        root /home/username/mysite/static;\
+    \}\
+\
+    location /admin/media/ \{\
+        # this changes depending on your python version\
+        root /usr/lib/python2.6/site-packages/django/contrib;\
+    \}\
+\
+    error_page   500 502 503 504  /home/username/mysite/static/50x.html;\
 \}\
 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+sudo nginx -s reload\
+sudo service nginx restart\
+	(start up nginx)\
+\
+sudo yum install upstart\
+\
+vi /etc/init/mysite.conf\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+description "My website - mysite"\
+start on runlevel [2345]\
+stop on runlevel [06]\
+respawn\
+respawn limit 10 5\
+\
+script\
+                NAME=mysite\
+                PORT=8001\
+                NUM_WORKERS=2\
+                TIMEOUT=120\
+                USER=username\
+                GROUP=wheel\
+                LOGFILE=/var/log/gunicorn/$NAME.log\
+                LOGDIR=$(dirname $LOGFILE)\
+                test -d $LOGDIR || mkdir -p $LOGDIR\
+                cd /home/$USER/$NAME\
+                exec gunicorn_django \\\
+                         -w $NUM_WORKERS -t $TIMEOUT \\\
+                        --user=$USER --group=$GROUP --log-level=debug \\\
+                        --name=$NAME -b 127.0.0.1:$PORT \\\
+                        --log-file=$LOGFILE 2>>$LOGFILE\
+end script\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97 \
+\
+sudo start mysite\
+\
+sudo ln -s /lib/init/upstart-job /etc/init.d/mysite\
+	(add new system service)\
+update-rc.d mysite defaults\
+	(Make it starts at system boot:)\
 \
 }
