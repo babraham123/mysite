@@ -1,7 +1,7 @@
 from labs.models import Table
+from labs.models import Lab
 from django.contrib import admin
 
-class TableAdmin(admin.ModelAdmin):
-    fields = ['title','key','ip','port']
+myModels = [Table, Lab]
+admin.site.register(myModels)
 
-admin.site.register(Table, TableAdmin)
