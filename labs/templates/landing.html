@@ -1,18 +1,30 @@
 {% extends "navbar2.html" %}
 {% block body %}
 
-<div class="container">
+<div class="container-fluid">
 
 <br/>
-<br/>
-<br/>
-<h1>Enter in the secret key to begin interacting with your LED Table. Cheers!</h1>
+<h1>Experiments in Web Technologies</h1>
 <br/>
 
-<form action="/lab/" method="post">
-	{{ form.as_p }}
-	<input class="btn btn-success" type="submit" value="Submit" />
-</form>
+{% if labs %}
+	<div class="row-fluid">
+		<div class="col-xs-12 center">
+		{% for lab in labs %}
+			<div class="span5 jumbotron">
+				<h2><a href="{{ lab.filename }}">{{ lab.title }}</a></h2>
+				<p><i>{{ lab.description }}</i></p>
+				<img src="/media/{{ lab.icon_address }}" alt="{{ lab.title }}"/>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+
+{% else %}
+	<br>
+	<p>This site is currently under construction.</p>
+{% endif %}
+
 
 </div>
 {% endblock %}

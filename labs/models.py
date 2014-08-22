@@ -11,3 +11,12 @@ class Table(models.Model):
 
 class KeyForm(forms.Form):
     key = forms.CharField(widget=forms.PasswordInput(), max_length=100)
+
+class Lab(models.Model):
+    title = models.CharField(max_length=100)
+    filename = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
+    icon_address = models.CharField(max_length=100)
+    created = models.DateField('date created')
+    def __unicode__(self):
+        return self.title
