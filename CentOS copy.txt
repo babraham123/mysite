@@ -223,7 +223,7 @@ TEMPLATE_DIRS = (
 
 cd ~/mysite/
 python manage.py syncdb
-	(create Djago super user too)
+	(create Django super user too)
 python manage.py sql [name of app] (if you have any apps)
 python manage.py syncdb
 	(have python create mysql tables)

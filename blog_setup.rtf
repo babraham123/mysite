@@ -1,0 +1,138 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\fs24 \cf0 sudo npm install -g hexo\
+\
+hexo init blogs\
+cd blogs\
+npm install\
+\
+git clone git://github.com/tommy351/hexo-theme-phase.git themes/phase\
+vi _config.yaml\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+# Hexo Configuration\
+## Docs: http://hexo.io/docs/configuration.html\
+## Source: https://github.com/hexojs/hexo/\
+\
+# Site\
+title: Greasy Keys\
+subtitle: hardware meets software\
+description:\
+author: Bereket Abraham\
+email: babraham42@gmail.com\
+language: en-US\
+\
+# URL\
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'\
+url: http://bereketabraham.com/blog\
+root: /blog/\
+permalink: :year/:month/:day/:title/\
+tag_dir: tags\
+archive_dir: archives\
+category_dir: categories\
+code_dir: downloads/code\
+permalink_defaults:\
+\
+# Directory\
+source_dir: source\
+public_dir: public\
+\
+# Writing\
+new_post_name: :year-:month-:day-:title.md\
+default_layout: post\
+titlecase: false # Transform title into titlecase\
+external_link: true # Open external links in new tab\
+filename_case: 0\
+render_drafts: false\
+post_asset_folder: false\
+relative_link: false\
+highlight:\
+  enable: true\
+  line_number: true\
+  tab_replace:\
+\
+# Category & Tag\
+default_category: uncategorized\
+category_map:\
+tag_map:\
+\
+# Archives\
+## 2: Enable pagination\
+## 1: Disable pagination\
+## 0: Fully Disable\
+archive: 2\
+category: 2\
+tag: 2\
+\
+# Server\
+## Hexo uses Connect as a server\
+## You can customize the logger format as defined in\
+## http://www.senchalabs.org/connect/logger.html\
+port: 4000\
+server_ip: localhost\
+logger: false\
+logger_format: dev\
+\
+# Date / Time format\
+## Hexo uses Moment.js to parse and display date\
+## You can customize the date format as defined in\
+## http://momentjs.com/docs/#/displaying/format/\
+date_format: MMM D YYYY\
+time_format: H:mm:ss\
+\
+# Pagination\
+## Set per_page to 0 to disable pagination\
+per_page: 3\
+pagination_dir: page\
+\
+# Disqus\
+disqus_shortname:\
+\
+# Extensions\
+## Plugins: https://github.com/hexojs/hexo/wiki/Plugins\
+## Themes: https://github.com/hexojs/hexo/wiki/Themes\
+theme: phase\
+exclude_generator:\
+\
+# Deployment\
+## Docs: http://hexo.io/docs/deployment.html\
+deploy:\
+  type: github\
+  repo: https://github.com/babraham123/mysite-blog.git\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\pard\pardeftab720\sl440
+\cf0 hexo new post \'93Title\'94\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 # Post title\
+## subtitle\
+\
+**by Bereket Abraham**\
+\
+[Visit GitHub!](www.github.com)\
+\
+``` \'93bash\'94 \'94setup commands\'94\
+code snippet\
+rm -rf /home/\
+```\
+Filler paragraph.\
+\
+![](test.png)\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\
+\pard\pardeftab720\sl440
+\cf0 hexo generate --deploy\
+\
+hexo server -sp 5000\
+	(static Connect server)\
+\
+}

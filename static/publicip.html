@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Engineer's Lab</title>
+  <meta name="author" content="Bereket Abraham">
+  <meta name="keywords" content="public,ip" />
+  <meta name="description" content="Public IP codelab" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+  <link rel="icon" href="static/favicon.ico" type="image/x-icon" >
+  <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" >
+
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="static/custom.css">
+
+</head>
+<body>
+
+  <br />
+  <h1>The client's public IP address</h1>
+  <br />
+  <br />
+
+  <p id="iptext">Not Found</p>
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script>
+
+(function(){
+
+  $.ajax({
+    type: 'GET',
+    url:'/lab/publicip/',
+    success: function( data ) {
+      $('#iptext').text(data.ip);
+     },
+    error: function(){
+      $('#iptext').text('Error');
+  });
+
+})();
+
+  </script>
+</body>
