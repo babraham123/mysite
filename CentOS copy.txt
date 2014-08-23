@@ -127,7 +127,7 @@ cd mysite
 5. Set up mod_wsgi (A python library for Apache). For testing, you can skip this and just use the development server that comes with django (instead of Apache).
 
 su
-emacs /etc/httpd/conf.d/wsgi.conf
+vi /etc/httpd/conf.d/wsgi.conf
 	(integrate django and apache)
 
 ----------------------
@@ -196,7 +196,7 @@ mysql -u root -p
 	(create a new mysql user)
 
 exit (su)
-emacs ~/mysite/mysite/settings.py
+vi ~/mysite/mysite/settings.py
 	(add the details to your settings file)
 
 --------------------
@@ -237,7 +237,7 @@ sudo apachectl restart
 
 7. If you get 403 permission denied errors
 
-emacs mysite/wsgi.py
+vi mysite/wsgi.py
 
 ______________________
 import sys

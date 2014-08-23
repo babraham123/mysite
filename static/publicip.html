@@ -29,7 +29,7 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script>
 
-(function(){
+$(document).ready(function() {
 
   $.ajax({
     type: 'GET',
@@ -41,7 +41,7 @@
       $('#iptext').text('Error');
   });
 
-})();
+});
 
   </script>
 </body>

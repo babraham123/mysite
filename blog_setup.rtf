@@ -1,17 +1,19 @@
 {\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\margl1440\margr1440\vieww10800\viewh9820\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
 \f0\fs24 \cf0 sudo npm install -g hexo\
 \
-hexo init blogs\
-cd blogs\
-npm install\
+hexo init myblog\
+cd myblog\
+sudo npm install\
 \
 git clone git://github.com/tommy351/hexo-theme-phase.git themes/phase\
+	(download the phase theme)\
 vi _config.yaml\
+	(configure your git repo, pagination options, port #)\
 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
 # Hexo Configuration\
 ## Docs: http://hexo.io/docs/configuration.html\
@@ -71,7 +73,7 @@ tag: 2\
 ## Hexo uses Connect as a server\
 ## You can customize the logger format as defined in\
 ## http://www.senchalabs.org/connect/logger.html\
-port: 4000\
+port: 8008\
 server_ip: localhost\
 logger: false\
 logger_format: dev\
@@ -105,9 +107,10 @@ deploy:\
 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
 \
 \pard\pardeftab720\sl440
-\cf0 hexo new post \'93Title\'94\
+\cf0 hexo new post "Title" \
+\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
+\cf0 vi source/_posts/Title.md\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
@@ -118,7 +121,7 @@ deploy:\
 \
 [Visit GitHub!](www.github.com)\
 \
-``` \'93bash\'94 \'94setup commands\'94\
+``` "bash" "setup commands"\
 code snippet\
 rm -rf /home/\
 ```\
@@ -132,7 +135,68 @@ Filler paragraph.\
 \pard\pardeftab720\sl440
 \cf0 hexo generate --deploy\
 \
-hexo server -sp 5000\
+hexo server -s\
 	(static Connect server)\
 \
-}
+(or with forever)\
+vi blog_server.js\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+require('hexo').init(\{command: 'server'\});\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+vi package.json\
+	(add hexo to the package config)\
+\pard\pardeftab720\sl440
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\{\
+  "name": "hexo-site",\
+  "version": "2.8.2",\
+  "private": true,\
+  "dependencies": \{\
+    \'93hexo\'94: "2.8.2",\
+    "hexo-renderer-ejs": "*",\
+    "hexo-renderer-stylus": "*",\
+    "hexo-renderer-marked": "*"\
+  \}\
+\}\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+\pard\pardeftab720\sl440
+\cf0 vi /etc/init/myblog.conf\
+	(create new upstart manager)\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 description "node hexo server for my blog - myblog\'94\
+start on runlevel [2345]\
+stop on runlevel [06]\
+\
+expect fork\
+respond\
+respawn limit 10 5\
+console output\
+\
+script\
+        NAME=myblog\
+        USER=username\
+        GROUP=wheel\
+        MAINFILE=blog_server.js\
+        LOGFILE=/var/log/forever/$NAME.log\
+        OUTFILE=/var/log/forever/$NAME_stdout.log\
+        ERRFILE=/var/log/forever/$NAME_stderr.log\
+        LOGDIR=$(dirname $LOGFILE)\
+        test -d $LOGDIR || mkdir -p $LOGDIR\
+        cd /home/$USER/$NAME\
+\
+        exec forever start -a -l $LOGFILE -o $OUTFILE -e $ERRFILE $MAINFILE\
+end script\
+\
+post-start script\
+   echo "myblog started through forever + upstart\'94\
+end script\
+\pard\pardeftab720\sl440
+\cf0 \'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97 \
+sudo start myblog\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 sudo ln -s /lib/init/upstart-job /etc/init.d/myblog\
+	(add new system service)\
+update-rc.d myblog defaults\
+	(Make it starts at system boot)}
