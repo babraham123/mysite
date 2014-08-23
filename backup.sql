@@ -81,7 +81,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `content_type_id` (`content_type_id`,`codename`),
   KEY `auth_permission_37ef4eb4` (`content_type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add permission',2,'add_permission'),(5,'Can change permission',2,'change_permission'),(6,'Can delete permission',2,'delete_permission'),(7,'Can add group',3,'add_group'),(8,'Can change group',3,'change_group'),(9,'Can delete group',3,'delete_group'),(10,'Can add user',4,'add_user'),(11,'Can change user',4,'change_user'),(12,'Can delete user',4,'delete_user'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add project',7,'add_project'),(20,'Can change project',7,'change_project'),(21,'Can delete project',7,'delete_project'),(22,'Can add link',8,'add_link'),(23,'Can change link',8,'change_link'),(24,'Can delete link',8,'delete_link'),(25,'Can add picture',9,'add_picture'),(26,'Can change picture',9,'change_picture'),(27,'Can delete picture',9,'delete_picture'),(28,'Can add video',10,'add_video'),(29,'Can change video',10,'change_video'),(30,'Can delete video',10,'delete_video'),(31,'Can add post',11,'add_post'),(32,'Can change post',11,'change_post'),(33,'Can delete post',11,'delete_post'),(34,'Can add table',12,'add_table'),(35,'Can change table',12,'change_table'),(36,'Can delete table',12,'delete_table');
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can add permission',2,'add_permission'),(5,'Can change permission',2,'change_permission'),(6,'Can delete permission',2,'delete_permission'),(7,'Can add group',3,'add_group'),(8,'Can change group',3,'change_group'),(9,'Can delete group',3,'delete_group'),(10,'Can add user',4,'add_user'),(11,'Can change user',4,'change_user'),(12,'Can delete user',4,'delete_user'),(13,'Can add content type',5,'add_contenttype'),(14,'Can change content type',5,'change_contenttype'),(15,'Can delete content type',5,'delete_contenttype'),(16,'Can add session',6,'add_session'),(17,'Can change session',6,'change_session'),(18,'Can delete session',6,'delete_session'),(19,'Can add project',7,'add_project'),(20,'Can change project',7,'change_project'),(21,'Can delete project',7,'delete_project'),(22,'Can add link',8,'add_link'),(23,'Can change link',8,'change_link'),(24,'Can delete link',8,'delete_link'),(25,'Can add picture',9,'add_picture'),(26,'Can change picture',9,'change_picture'),(27,'Can delete picture',9,'delete_picture'),(28,'Can add video',10,'add_video'),(29,'Can change video',10,'change_video'),(30,'Can delete video',10,'delete_video'),(31,'Can add post',11,'add_post'),(32,'Can change post',11,'change_post'),(33,'Can delete post',11,'delete_post'),(34,'Can add table',12,'add_table'),(35,'Can change table',12,'change_table'),(36,'Can delete table',12,'delete_table'),(37,'Can add lab',13,'add_lab'),(38,'Can change lab',13,'change_lab'),(39,'Can delete lab',13,'delete_lab');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +124,7 @@ CREATE TABLE `auth_user` (
 
 LOCK TABLES `auth_user` WRITE;
 /*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$1Ans6k1L5mSy$mqd/3evJ+9qlWsQ5KxJZVMS9VzfSlr1ulJnvo+CzXSU=','2014-07-23 04:16:38',1,'babraham','','','babraham42@gmail.com',1,1,'2014-05-26 18:22:38');
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$12000$1Ans6k1L5mSy$mqd/3evJ+9qlWsQ5KxJZVMS9VzfSlr1ulJnvo+CzXSU=','2014-08-22 06:26:51',1,'babraham','','','babraham42@gmail.com',1,1,'2014-05-26 18:22:38');
 /*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +227,7 @@ CREATE TABLE `django_admin_log` (
   PRIMARY KEY (`id`),
   KEY `django_admin_log_6340c63c` (`user_id`),
   KEY `django_admin_log_37ef4eb4` (`content_type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +236,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2014-05-26 19:05:35',1,7,'1','Computational Fluid Dynamics',1,''),(2,'2014-05-26 19:07:17',1,7,'2','Engine Analysis',1,''),(3,'2014-05-26 19:08:49',1,7,'3','Magnetic Fluids',1,''),(4,'2014-05-26 19:21:53',1,7,'4','Accelerating Cylinders',1,''),(5,'2014-05-26 19:25:12',1,7,'5','Posiedon Autonomous Robot',1,''),(6,'2014-05-26 19:31:03',1,7,'6','3D Volumetric Display',1,''),(7,'2014-05-26 19:36:02',1,7,'7','Web Development',1,''),(8,'2014-05-26 19:39:01',1,7,'8','Narrathon TV',1,''),(9,'2014-05-26 19:41:09',1,11,'1','How to setup Django + mysql + Apache',1,''),(10,'2014-05-26 19:46:17',1,11,'2','Setup Gunicorn + Nginx + Upstart for Django',1,''),(11,'2014-05-26 19:49:55',1,11,'3','Install Pandoc',1,''),(12,'2014-05-26 19:54:19',1,11,'4','Logging in python',1,''),(13,'2014-05-26 20:02:14',1,11,'5','Intro to (Web) Programming',1,''),(14,'2014-05-26 20:02:57',1,11,'5','Intro to (Web) Programming',2,'Changed body.'),(15,'2014-05-27 14:11:09',1,7,'8','Narrathon TV',2,'Changed embed for video \"Demo\". Changed embed for video \"Final Presentation\". Changed embed for video \"Website Traffic\".'),(16,'2014-05-27 14:11:29',1,7,'6','3D Volumetric Display',2,'Changed embed for video \"Project Summary\". Changed embed for video \"Letter P\".'),(17,'2014-05-27 14:11:41',1,7,'5','Posiedon Autonomous Robot',2,'Changed embed for video \"Obstacle Test\". Changed embed for video \"Arm Test\". Changed embed for video \"Line Scanning Camera\".'),(18,'2014-05-27 14:11:55',1,7,'4','Accelerating Cylinders',2,'Changed embed for video \"Simulation, Re=500, beta=1\". Changed embed for video \"Simulation, Re=100, beta=0\".'),(19,'2014-05-27 14:12:07',1,7,'1','Computational Fluid Dynamics',2,'No fields changed.'),(20,'2014-06-05 06:07:47',1,7,'3','Magnetic Fluids',2,'Added video \"Electromagnetic variation\".'),(21,'2014-06-05 06:08:02',1,7,'8','Narrathon TV',2,'Changed embed for video \"Demo\". Changed embed for video \"Final Presentation\". Changed embed for video \"Website Traffic\".'),(22,'2014-06-05 06:08:10',1,7,'7','Web Development',2,'No fields changed.'),(23,'2014-06-05 06:08:21',1,7,'6','3D Volumetric Display',2,'Changed embed for video \"Project Summary\". Changed embed for video \"Letter P\".'),(24,'2014-06-05 06:08:33',1,7,'4','Accelerating Cylinders',2,'Changed embed for video \"Simulation, Re=500, beta=1\". Changed embed for video \"Simulation, Re=100, beta=0\".'),(25,'2014-06-05 06:08:44',1,7,'1','Computational Fluid Dynamics',2,'Changed embed for video \"Forward Projection, Set 2\". Changed embed for video \"Backward Projection, Set 2\".'),(26,'2014-06-05 06:20:23',1,7,'5','Posiedon Autonomous Robot',2,'Added video \"Line Scanning Camera\". Changed embed and title for video \"Competition Day\". Changed embed and title for video \"Obstacle Test\". Changed embed and title for video \"Arm Test\".'),(27,'2014-06-05 06:25:12',1,7,'5','Posiedon Autonomous Robot',2,'Changed embed for video \"Competition Day\".'),(28,'2014-07-02 02:27:55',1,7,'9','Script Runner',1,''),(29,'2014-07-02 03:22:31',1,7,'10','Light Table',1,''),(30,'2014-07-02 03:22:44',1,7,'8','Narrathon TV',2,'No fields changed.'),(31,'2014-07-02 03:23:04',1,7,'7','Web Development',2,'No fields changed.'),(32,'2014-07-02 03:25:23',1,11,'6','Raspberry Pi Setup',1,''),(33,'2014-07-02 03:33:57',1,7,'10','Light Table',2,'Changed tech_skills. Changed address for picture \"interface1.png\".'),(34,'2014-07-02 03:36:16',1,7,'6','3D Volumetric Display',2,'Added link \"Source Code\".'),(35,'2014-07-02 03:36:37',1,7,'5','Posiedon Autonomous Robot',2,'Added link \"Sample Code\".'),(36,'2014-07-23 05:31:00',1,12,'1','Dev Table',1,'');
+INSERT INTO `django_admin_log` VALUES (1,'2014-05-26 19:05:35',1,7,'1','Computational Fluid Dynamics',1,''),(2,'2014-05-26 19:07:17',1,7,'2','Engine Analysis',1,''),(3,'2014-05-26 19:08:49',1,7,'3','Magnetic Fluids',1,''),(4,'2014-05-26 19:21:53',1,7,'4','Accelerating Cylinders',1,''),(5,'2014-05-26 19:25:12',1,7,'5','Posiedon Autonomous Robot',1,''),(6,'2014-05-26 19:31:03',1,7,'6','3D Volumetric Display',1,''),(7,'2014-05-26 19:36:02',1,7,'7','Web Development',1,''),(8,'2014-05-26 19:39:01',1,7,'8','Narrathon TV',1,''),(9,'2014-05-26 19:41:09',1,11,'1','How to setup Django + mysql + Apache',1,''),(10,'2014-05-26 19:46:17',1,11,'2','Setup Gunicorn + Nginx + Upstart for Django',1,''),(11,'2014-05-26 19:49:55',1,11,'3','Install Pandoc',1,''),(12,'2014-05-26 19:54:19',1,11,'4','Logging in python',1,''),(13,'2014-05-26 20:02:14',1,11,'5','Intro to (Web) Programming',1,''),(14,'2014-05-26 20:02:57',1,11,'5','Intro to (Web) Programming',2,'Changed body.'),(15,'2014-05-27 14:11:09',1,7,'8','Narrathon TV',2,'Changed embed for video \"Demo\". Changed embed for video \"Final Presentation\". Changed embed for video \"Website Traffic\".'),(16,'2014-05-27 14:11:29',1,7,'6','3D Volumetric Display',2,'Changed embed for video \"Project Summary\". Changed embed for video \"Letter P\".'),(17,'2014-05-27 14:11:41',1,7,'5','Posiedon Autonomous Robot',2,'Changed embed for video \"Obstacle Test\". Changed embed for video \"Arm Test\". Changed embed for video \"Line Scanning Camera\".'),(18,'2014-05-27 14:11:55',1,7,'4','Accelerating Cylinders',2,'Changed embed for video \"Simulation, Re=500, beta=1\". Changed embed for video \"Simulation, Re=100, beta=0\".'),(19,'2014-05-27 14:12:07',1,7,'1','Computational Fluid Dynamics',2,'No fields changed.'),(20,'2014-06-05 06:07:47',1,7,'3','Magnetic Fluids',2,'Added video \"Electromagnetic variation\".'),(21,'2014-06-05 06:08:02',1,7,'8','Narrathon TV',2,'Changed embed for video \"Demo\". Changed embed for video \"Final Presentation\". Changed embed for video \"Website Traffic\".'),(22,'2014-06-05 06:08:10',1,7,'7','Web Development',2,'No fields changed.'),(23,'2014-06-05 06:08:21',1,7,'6','3D Volumetric Display',2,'Changed embed for video \"Project Summary\". Changed embed for video \"Letter P\".'),(24,'2014-06-05 06:08:33',1,7,'4','Accelerating Cylinders',2,'Changed embed for video \"Simulation, Re=500, beta=1\". Changed embed for video \"Simulation, Re=100, beta=0\".'),(25,'2014-06-05 06:08:44',1,7,'1','Computational Fluid Dynamics',2,'Changed embed for video \"Forward Projection, Set 2\". Changed embed for video \"Backward Projection, Set 2\".'),(26,'2014-06-05 06:20:23',1,7,'5','Posiedon Autonomous Robot',2,'Added video \"Line Scanning Camera\". Changed embed and title for video \"Competition Day\". Changed embed and title for video \"Obstacle Test\". Changed embed and title for video \"Arm Test\".'),(27,'2014-06-05 06:25:12',1,7,'5','Posiedon Autonomous Robot',2,'Changed embed for video \"Competition Day\".'),(28,'2014-07-02 02:27:55',1,7,'9','Script Runner',1,''),(29,'2014-07-02 03:22:31',1,7,'10','Light Table',1,''),(30,'2014-07-02 03:22:44',1,7,'8','Narrathon TV',2,'No fields changed.'),(31,'2014-07-02 03:23:04',1,7,'7','Web Development',2,'No fields changed.'),(32,'2014-07-02 03:25:23',1,11,'6','Raspberry Pi Setup',1,''),(33,'2014-07-02 03:33:57',1,7,'10','Light Table',2,'Changed tech_skills. Changed address for picture \"interface1.png\".'),(34,'2014-07-02 03:36:16',1,7,'6','3D Volumetric Display',2,'Added link \"Source Code\".'),(35,'2014-07-02 03:36:37',1,7,'5','Posiedon Autonomous Robot',2,'Added link \"Sample Code\".'),(36,'2014-07-23 05:31:00',1,12,'1','Dev Table',1,''),(37,'2014-08-22 06:45:20',1,13,'1','Public IP',1,'');
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,7 +254,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `app_label` (`app_label`,`model`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,7 +263,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (1,'log entry','admin','logentry'),(2,'permission','auth','permission'),(3,'group','auth','group'),(4,'user','auth','user'),(5,'content type','contenttypes','contenttype'),(6,'session','sessions','session'),(7,'project','projects','project'),(8,'link','projects','link'),(9,'picture','projects','picture'),(10,'video','projects','video'),(11,'post','blogs','post'),(12,'table','labs','table');
+INSERT INTO `django_content_type` VALUES (1,'log entry','admin','logentry'),(2,'permission','auth','permission'),(3,'group','auth','group'),(4,'user','auth','user'),(5,'content type','contenttypes','contenttype'),(6,'session','sessions','session'),(7,'project','projects','project'),(8,'link','projects','link'),(9,'picture','projects','picture'),(10,'video','projects','video'),(11,'post','blogs','post'),(12,'table','labs','table'),(13,'lab','labs','lab');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,8 +289,36 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('npfw6d6twkjis3qdo65lgogjfuzr8oup','Y2ZlMmQ1ZGEwNTI5ZWMwZjg5ZmYwOTAxMjVjYTE0YzZlNzc1ZmQ0Nzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2014-07-16 02:09:44'),('8ckhdtzu8hdp3vwbslrwtwwbxa39vi4d','YTg1YWU5NzgxNTA1ODU4ZDY5ZmI4YWM1ZjRiZGU0ZWZhYThjNDEzNzp7fQ==','2014-06-19 06:25:23'),('po1053jwyok4idejw6em3q3qlhj78rge','Y2ZlMmQ1ZGEwNTI5ZWMwZjg5ZmYwOTAxMjVjYTE0YzZlNzc1ZmQ0Nzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2014-08-06 04:16:38');
+INSERT INTO `django_session` VALUES ('npfw6d6twkjis3qdo65lgogjfuzr8oup','Y2ZlMmQ1ZGEwNTI5ZWMwZjg5ZmYwOTAxMjVjYTE0YzZlNzc1ZmQ0Nzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2014-07-16 02:09:44'),('8ckhdtzu8hdp3vwbslrwtwwbxa39vi4d','YTg1YWU5NzgxNTA1ODU4ZDY5ZmI4YWM1ZjRiZGU0ZWZhYThjNDEzNzp7fQ==','2014-06-19 06:25:23'),('po1053jwyok4idejw6em3q3qlhj78rge','Y2ZlMmQ1ZGEwNTI5ZWMwZjg5ZmYwOTAxMjVjYTE0YzZlNzc1ZmQ0Nzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2014-08-06 04:16:38'),('jqcwx8rvlq27uc5lm4ddjrrlx15f36tp','Y2ZlMmQ1ZGEwNTI5ZWMwZjg5ZmYwOTAxMjVjYTE0YzZlNzc1ZmQ0Nzp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6MX0=','2014-09-05 06:26:51');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `labs_lab`
+--
+
+DROP TABLE IF EXISTS `labs_lab`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `labs_lab` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `filename` varchar(100) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `icon_address` varchar(100) NOT NULL,
+  `created` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `labs_lab`
+--
+
+LOCK TABLES `labs_lab` WRITE;
+/*!40000 ALTER TABLE `labs_lab` DISABLE KEYS */;
+INSERT INTO `labs_lab` VALUES (1,'Public IP','/static/publicip.html','Get the client\'s public IP address.','/media/test.png','2014-08-22');
+/*!40000 ALTER TABLE `labs_lab` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -438,4 +466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-21  5:05:01
+-- Dump completed on 2014-08-22  5:05:01

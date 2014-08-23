@@ -11,7 +11,7 @@ def landing(request):
     return render(request, 'landing.html', context)
 
 def publicip(request):
-    return HttpResponse( json.dumps({'ip':get_ip(request)}) )
+    return HttpResponse( json.dumps({'ip':get_ip(request)}), content_type="application/json" )
 
 @csrf_exempt
 def key_input(request):
