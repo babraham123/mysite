@@ -11,11 +11,12 @@
 	<div class="row-fluid">
 		<div class="col-xs-12 center">
 		{% for lab in labs %}
-			<div class="span5 jumbotron">
+			<div class="col-xs-5 jumbotron">
 				<h2><a href="{{ lab.filename }}">{{ lab.title }}</a></h2>
 				<p><i>{{ lab.description }}</i></p>
 				<!-- <img src="/media/{{ lab.icon_address }}" alt="{{ lab.title }}"/> -->
 			</div>
+			<div class="col-xs-1"></div>
 		{% endfor %}
 		</div>
 	</div>
