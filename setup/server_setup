@@ -1,0 +1,129 @@
+sudo chmod 755 /home/username/mysite -R
+	(0755 = User:rwx Group:r-x World:r-x)
+	(0644 = User:rwx Group:r World:r)
+
+sudo pip install gunicorn
+
+sudo apt-get install nginx
+
+lscpu | grep '^CPU(s)'
+	(record the number of CPUs, use that for the number of worker_processes)
+
+vi /etc/nginx/nginx.conf
+———————————————————
+user              nginx;
+worker_processes  1;
+———————————————————
+	(set the number of worker_processes and the user to run as)
+
+vi /etc/nginx/conf.d/mysite.conf
+———————————————————
+# virtual host using mix of IP-, name-, and port-based configuration
+# from the django app, mysite, running on gunicorn
+
+server {
+    listen       80;
+#    listen       someip:8080;
+    server_name  sitename.com;
+
+    access_log  /var/log/nginx/mysite.log;
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Host $server_name;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_pass http://127.0.0.1:8001;
+    }
+
+    location /media/ {
+        root /home/username/mysite/media;
+    }
+
+    location /static/ {
+        root /home/username/mysite/static;
+    }
+
+    location /admin/media/ {
+        # this changes depending on your python version
+        root /usr/lib/python2.6/site-packages/django/contrib;
+    }
+
+    location /socket.io/ {
+        proxy_pass http://127.0.0.1:8002;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+    }
+
+    location /socket.io/static/ {
+        root /home/babraham/mysocketio/public;
+    }
+
+    error_page   500 502 503 504  /home/username/mysite/static/50x.html;
+}
+———————————————————
+
+sudo nginx -s reload
+sudo service nginx restart
+	(start up nginx)
+
+sudo apt-get install upstart
+
+vi /etc/init/mysite.conf
+——————————————————
+description "My website - mysite"
+start on runlevel [2345]
+stop on runlevel [06]
+respawn
+respawn limit 10 5
+
+script
+                NAME=mysite
+                PORT=8001
+                NUM_WORKERS=2
+                TIMEOUT=120
+                USER=username
+                GROUP=wheel
+                LOGFILE=/var/log/gunicorn/$NAME.log
+                LOGDIR=$(dirname $LOGFILE)
+                test -d $LOGDIR || mkdir -p $LOGDIR
+                cd /home/$USER/$NAME
+                exec gunicorn_django \
+                         -w $NUM_WORKERS -t $TIMEOUT \
+                        --user=$USER --group=$GROUP --log-level=debug \
+                        --name=$NAME -b 127.0.0.1:$PORT \
+                        --log-file=$LOGFILE 2>>$LOGFILE
+end script
+———————————————————— 
+
+sudo start mysite
+
+sudo ln -s /lib/init/upstart-job /etc/init.d/mysite
+	(add new system service)
+update-rc.d mysite defaults
+	(Make it starts at system boot)
+
+sudo initctl list
+	(view status of all services)
+
+
+———————————————————————————— 
+
+Add your source code to a git repository
+
+
+mysqldump -u root -p[password] mysitedb > backup.sql
+    (back up your django database)
+
+crontab -e
+    (cron your backups and git pull so that they happen on a scheduled basis)
+———————————————————————————— 
+# set variable for emailed errors
+MAILTO=babraham42@gmail.com
+
+# backup the database and check for updates
+# daily at 5:05am UTC (1:05am EDT, 12:05am EST)
+05 05 * * * source /home/username/.bash_profile; mysqldump -u root -p[password] mysitedb > /home/username/mysite/backup.sql; cd /home/username/mysite; git pull
+
+———————————————————————————— 
+
