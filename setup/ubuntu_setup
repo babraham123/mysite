@@ -1,74 +1,28 @@
-CloudAtCost
-gmail, libro de cabezas
-IP: 162.244.25.50
-pswrd: ezYTATE8y7
-Console: https://panel.cloudatcost.com
-login: gmail
-babraham user, libro de cabezas
+Below is a step by step account of how to set up a django (1.6) web application on Ubuntu, running Apache (2.5) and python (2.7)
 
-MYSQL
-'USER': root,              
-'PASSWORD': libro de cabezas
+sudo apt-get update
+sudo apt-get upgrade
 
-'mysitedb',
-'USER': 'mysiteuser',              
-'PASSWORD': 'dbpass'
+sudo adduser babraham
+	(libro to caras)
+sudo usermod -a -G sudo babraham
+(log off, log into new user)
 
-Django superuser:
-babraham
-babraham42@gmail.com
-libro de cabezas
+mkdir .ssh
+ssh-keygen -t rsa -C "email@addr"
+cat .ssh/id_rsa.pub
+	(copy for github)
+sudo chmod 700 ~/.ssh
+sudo chmod 600 ~/.ssh/id_rsa
 
-CloudAtCost being retarded
-rm -rf /etc/cron.daily/*
-echo 600 > /sys/block/sda/device/timeout
-echo 600 > /sys/block/sr0/device/timeout
-echo 'echo 600 > /sys/block/sda/device/timeout' >> /etc/rc.local
-echo 'echo 600 > /sys/block/sr0/device/timeout' >> /etc/rc.local
-
-
-Below is a step by step account of how to set up a django (1.6) web application on a CentOS (6.4) server, running Apache (2.5) and python (2.6, 2.7)
-
-1. Login as root and set up a new user
-
-ssh root@[ip address]
-	(you probably want to eventually disable root login)
-
-useradd myuser
-	(create user)
-
-passwd myuser
-	(type in your password twice)
-
-usermod -a -G wheel myuser
-	(add user to a sudo enabled group)
-
-visudo -f /etc/sudoers
-	(allow the wheel group to use sudo by editing the shudders file)
-	(press i, uncomment the 2nd line, then press ESC, shift ZZ)
-——-----------------
-## Allows people in group wheel to run all commands
-# %wheel        ALL=(ALL)       ALL
-------------------
-
-exit
 
 2. Login without typing in your password (not strictly necessary)
-(cite #7) http://wiki.centos.org/HowTos/Network/SecuringSSH
-
-(only your local machine)
-ssh-keygen -t rsa
-	(generate public/private key)
-
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/id_rsa
-	(set permissions on your private key)
-
+exit
 scp ~/.ssh/id_rsa.pub myuser@[ip address]:/home/myuser
 	(copy your public key onto remote server)
 
 ssh myuser@[ip address]
-	(on remote machine)
+	(ssh onto remote machine)
 
 mkdir ~/.ssh
 touch ~/.ssh/authorized_keys
@@ -77,44 +31,20 @@ touch ~/.ssh/authorized_keys
 cat id_rsa.pub >> ~/.ssh/authorized_keys
 rm id_rsa.pub
 	(add public key to authorized list)
+sudo chmod 600 ~/.ssh/authorized_keys
 
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-
-3. Install necessary packages. Since this is for CentOS, we yum.
-(cite) http://itekblog.com/django-centos-6-4/
-
-cat /etc/redhat-release
-	(check centos version. these cmds are for centos 6.4)
-
-su
-cd /opt/
-wget http://mirrors.nl.eu.kernel.org/fedora-epel/6/i386/epel-release-6-8.noarch.rpm
-rpm -Uvh epel-release-6-8.noarch.rpm
-rm epel-release-6-8.noarch.rpm -f
-	(add the EPEL repositories to get Django)
-
-yum upgrade
-yum install python
-	(should be 2.6.6)
-yum install sqlite
-yum install mod_wsgi
-yum install mysql mysql-server
-
-yum install python-pip
-pip install Django==1.6
+sudo apt-get install python-pip apache2 git-core
+sudo apt-get install mysql-server sqlite
+sudo apt-get install python-dev libmysqlclient-dev
+sudo pip install Django==1.6
 	(1.6 or whatever version you want)
-yum -y install mysql-devel
-yum install MySQL-python
-
+sudo pip install MySQL-python
 
 python
 >>> import django
 >>> print django.get_version()
 >>> quit()
-	(test to see if it downloaded properly)
-exit 
-	(out of su)
+	(test to see if it downloaded properl
 
 4. Django
 
@@ -264,6 +194,9 @@ restorecon -vR /etc/httpd
 (cite) http://code.google.com/p/modwsgi/wiki/WhereToGetHelp?tm=6#Conference_Presentations
 	(config problems on CentOS)
 
+Set file/folder permissions
+	(0755 = User:rwx Group:r-x World:r-x)
+	(0644 = User:rwx Group:r World:r)
 chmod o+rx /home/username/
 chmod o+rx /home/username/mysite/
 chmod o+rx /home/username/mysite/mysite/
