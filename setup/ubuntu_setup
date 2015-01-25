@@ -116,8 +116,12 @@ emacs /var/www/html/index.html
 
 chkconfig --levels 235 mysqld on
 /etc/init.d/mysqld start
+	(centOS)
+update-rc.d <service> defaults
+update-rc.d -f <service>  remove
+  (ubuntu)
+  If defaults is used then update-rc.d will make links to start the ser‐ vice in runlevels 2345 and to stop the service in runlevels 016. By default all the links will have sequence number 20, but this should be overridden if there are dependencies. For example if daemon B depends on A, then A must be started before B and B must be killed before A. You accomplish this by supplying two NN arguments. In general, core daemons should start early and be killed late, whilst applications can start late and be killed early.
 mysql_secure_installation
-	(get mysql working, choose a password)
 
 mysql -u root -p
 >> create database mysitedb;
@@ -177,7 +181,7 @@ ______________________
 	(add snippet to the top of the file)
 
 
-(Restart apache and check website)
+(Restart apache and check website- CentOS only)
 
 (cite) http://blog.endpoint.com/2010/02/selinux-httpd-modwsgi-26-rhel-centos-5.html
 	(problems with SELinux)
@@ -195,14 +199,15 @@ restorecon -vR /etc/httpd
 	(config problems on CentOS)
 
 Set file/folder permissions
-	(0755 = User:rwx Group:r-x World:r-x)
-	(0644 = User:rwx Group:r World:r)
-chmod o+rx /home/username/
-chmod o+rx /home/username/mysite/
-chmod o+rx /home/username/mysite/mysite/
-chmod o+rx /home/username/mysite/mysite/wsgi.py
-restorecon -vR /etc/httpd
+  (755 for directories and 644 for files)
+	(0755 = User:rwx Group:r-x World:r-x) - folders
+	(0644 = User:rwx Group:r World:r) - files
+chmod 755 /
+chmod 755 /home/
+chmod 755 /home/username/
+chmod 755 /home/username/mysite
 
+restorecon -vR /etc/httpd
 (Restart apache and check website)
 
 exit
