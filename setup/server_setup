@@ -127,7 +127,7 @@ sudo initctl list
 
 ———————————————————————————— 
 
-Add your source code to a git repository
+(Add your source code to a git repository)
 
 
 mysqldump -u root -p[password] mysitedb > backup.sql
@@ -146,6 +146,6 @@ MAILTO=babraham42@gmail.com
 
 ———————————————————————————— 
 
-sudo apt-get install nodejs npm
+sudo apt-get install nodejs nodejs-legacy npm mongodb
 sudo npm install forever -g
 
