@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orbital Mechanics: In Browser Demonstration</title>
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <style>
+  .graticule {
+    fill: none;
+    stroke: #777;
+    stroke-width: .5px;
+    stroke-opacity: .5;
+  }
+
+  .land {
+    fill: #222;
+  }
+
+  .boundary {
+    fill: none;
+    stroke: #fff;
+    stroke-width: .5px;
+  }
+
+  .orbit {
+    fill: none;
+    stroke: #FFAD33;
+    stroke-width: 2px;
+  }
+
+  .example {
+    fill: none;
+    stroke: #FF0000;
+    stroke-width: 2px;
+  }
+
+  .fullwidth {
+    width: 100%;
+  }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Satellite Orbit Simulator</h1>
+  </div>
+  
+  <div class="input-group">
+    <span class="input-group-addon" id="sizing-addon2">Eccentricity (e)</span>
+    <input type="text" class="form-control" placeholder="0.0 - 1.0" value="0.2" aria-describedby="sizing-addon2" id="eccentricity">
+    <span class="input-group-addon" id="sizing-addon2">SemiLatus Rectum (p)</span>
+    <input type="text" class="form-control" placeholder="multiple of Earth's radius" value="1.5" aria-describedby="sizing-addon2" id="semilatusrectum">
+    <span class="input-group-addon" id="sizing-addon2">Inclination (i)</span>
+    <input type="text" class="form-control" placeholder="0 - 360 deg" value="45" aria-describedby="sizing-addon2" id="inclination">
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon" id="sizing-addon2">Longitude of Ascending Node (&#937;)</span>
+    <input type="text" class="form-control" placeholder="0 - 360 deg" value="10" aria-describedby="sizing-addon2" id="longitudenode">
+    <span class="input-group-addon" id="sizing-addon2">Argument of Periapsis (&#969;)</span>
+    <input type="text" class="form-control" placeholder="0 - 360 deg" value="10" aria-describedby="sizing-addon2" id="periapsis">
+    <span class="input-group-addon" id="sizing-addon2">True Anomaly (&#957;)</span>
+    <input type="text" class="form-control" placeholder="0 - 360 deg" value="0" aria-describedby="sizing-addon2" id="trueanomaly">
+  </div>
+  <div class="input-group">
+    <span class="input-group-addon" id="sizing-addon2">Increments</span>
+    <input type="text" class="form-control" placeholder="100" value="100" aria-describedby="sizing-addon2" id="steps">
+    <span class="input-group-addon" id="sizing-addon2">Rotation</span>
+    <input type="range" id="rotation" min="-180" value="0" max="180" step="5">
+  </div>
+  <br />
+
+  <button class="btn btn-success" id="generateOrbit">Generate Orbit</button>
+  <button class="btn btn-warning" id="example">Example</button>
+</div>
+
+<div class="container">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#equirectangular" aria-controls="Equirectangular" role="tab" data-toggle="tab">Equirectangular</a></li>
+    <li role="presentation"><a href="#orthographic" aria-controls="orthographic" role="tab" data-toggle="tab">Orthographic</a></li>
+    <li role="presentation"><a href="#airy" aria-controls="airy" role="tab" data-toggle="tab">Airy</a></li>
+    <li role="presentation"><a href="#aitoff" aria-controls="aitoff" role="tab" data-toggle="tab">Aitoff</a></li>
+    <li role="presentation"><a href="#stereographic" aria-controls="stereographic" role="tab" data-toggle="tab">Stereographic</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content fullwidth">
+    <div role="tabpanel" class="tab-pane active fullwidth" id="equirectangular">...</div>
+    <div role="tabpanel" class="tab-pane fullwidth" id="orthographic">...</div>
+    <div role="tabpanel" class="tab-pane fullwidth" id="airy">...</div>
+    <div role="tabpanel" class="tab-pane fullwidth" id="aitoff">...</div>
+    <div role="tabpanel" class="tab-pane fullwidth" id="stereographic">...</div>
+  </div>
+</div>
+
+<br />
+<p>Assumes a spherical, non-rotating Earth.</p>
+<br /><br />
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-geo-projection/0.2.15/d3.geo.projection.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+<script src="mechanics.js"></script>
+<script src="graphics.js"></script>
+<script src="orbit.js"></script>
+
+</body>
+</html>

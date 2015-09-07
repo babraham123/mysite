@@ -1,0 +1,31 @@
+numeric.add([1,2],[3,4],[5,6],[7,8])
+// vector
+// sub, mul, div, neg
+
+numeric.dotVV([1,2],[3,4])
+OUT> 11
+// inner array are columns
+numeric.dotMV([[1,2],[3,4]],[5,6])
+OUT> [17,39]
+// numeric.dotVV() numeric.dotVM() numeric.dotMV() numeric.dotMM()
+
+// Solve Ax = b
+numeric.solve([[1,2],[3,4]],[17,39])
+OUT> [5,6]
+
+// matrix
+// det, inv, transpose, norm2, tensor
+
+// parseDate, parseFloat, parseCSV, toCSV
+
+numeric.getURL('tools/helloworld.txt').responseText
+
+// complex numbers
+
+// eigenvalues: numeric.eig(M)
+
+// Solve ODEs
+// numeric.dopri() => Dormand-Prince-Runge-Kutta integrator with adaptive time-stepping
+
+// Solve PDEs
+// numeric.cgrid(), numeric.cdelsq() => numerical Laplacian
