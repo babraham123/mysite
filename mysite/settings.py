@@ -20,9 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '&uakvb*6kf%aa^)(35*aydtvhbhw#mc(u)bw*-4-(t6-13&#z*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
+DEBUG = TEMPLATE_DEBUG = False
 
 ADMINS = (
     ('babraham', 'babraham42@gmail.com'),
@@ -77,6 +75,16 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Host for sending e-mail.
+EMAIL_HOST = 'smtp.gmail.com'
+# Port for sending e-mail.
+EMAIL_PORT = 587
+# Optional SMTP authentication information for EMAIL_HOST.
+EMAIL_HOST_USER = 'abrahamindustries42@gmail.com'
+EMAIL_HOST_PASSWORD = 'flyingducks1337~'
+EMAIL_USE_TLS = True 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
