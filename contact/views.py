@@ -16,6 +16,7 @@ def contact(request):
             if cc_myself:
                 recipients.append(sender)
             from django.core.mail import send_mail
+            subject = subject + " [" + sender + "]"
             send_mail(subject, message, sender, recipients)
 
             return HttpResponseRedirect('/contact/thanks/') # Redirect after POST
