@@ -28,6 +28,8 @@ ADMINS = (
 ALLOWED_HOSTS = [
     '.bereketabraham.com', # Allow domain and subdomains
     '.bereketabraham.com.', # Also allow FQDN and subdomains
+    '.xn--fyd5iqc9o.com',
+    '.xn--fyd5iqc9o.com.',
     '45.55.137.11',
 ]
 
