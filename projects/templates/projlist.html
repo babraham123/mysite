@@ -13,6 +13,22 @@
 				</div>
 			</div>
 		</div>
+
+
+		<div class="row">
+            <div class="col-md-7">
+                <a href="/project/{{ proj.id }}/">
+                    <img class="img-responsive" src="{{ proj.picture_set[0].address }}" alt="">
+                </a>
+            </div>
+            <div class="col-md-5">
+                <h3>{{ proj.title }}</h3>
+                <h4>{{ proj.subtitle }}</h4>
+                <p>Stuffy stuff stuff.</p>
+                <a class="btn btn-primary" href="/project/{{ proj.id }}/">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+
 	{% endfor %}
 
 {% else %}
