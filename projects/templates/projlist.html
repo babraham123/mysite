@@ -2,22 +2,20 @@
 {% block body %}
 
 <div class="container">
-
+<br />
 {% if latest_proj_list %}
 	{% for proj in latest_proj_list %}
 		<div class="row">
-		<div class="jumbotron">
-			<div class="col-md-7">
+			<div class="col-md-5">
 				<a href="/project/{{ proj.id }}/">
 					<img class="img-responsive" src="/media/{{ proj.picture_address }}" alt="">
 				</a>
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-7 jumbotron">
 				<h3>{{ proj.title }}</h3>
 				<h4>{{ proj.subtitle }}</h4>
 				<a class="btn btn-primary" href="/project/{{ proj.id }}/">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div>
-		</div>
 		</div>
 
 	{% endfor %}

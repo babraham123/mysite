@@ -8,9 +8,9 @@ def projlist(request):
     for proj in latest_proj_list:
         pics = proj.picture_set.all()
         if pics:
-            proj['picture_address'] = pics[0]
+            proj.picture_address = pics[0]
         else:
-            proj['picture_address'] = 'sheep.png'
+            proj.picture_address = 'sheep.png'
 
     context = {'latest_proj_list':latest_proj_list}
     return render(request, 'projlist.html', context)
