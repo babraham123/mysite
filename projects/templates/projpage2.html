@@ -36,6 +36,19 @@
 			{% endfor %}
 		</div>
 	</div>
+
+	{% for picture in proj.picture_set.all %}
+	{{ loop.cycle('<div class="row">', '') }}
+        <div class="col-md-6"> <!-- margin-bottom: 25px; -->
+            <a href="#">
+                <img class="img-responsive" src="/media/{{ picture.address }}" alt="">
+            </a>
+            <h3>{{ picture.title }}</h3>
+        </div>
+        <!-- <p> </p> -->
+	{{ loop.cycle('', '</div>') }}    
+    {% endfor %}
+
 </div>
 
 {% endblock %}
