@@ -9,9 +9,7 @@
 		<div class="jumbotron">
 			<div class="col-md-7">
 				<a href="/project/{{ proj.id }}/">
-				{% for picture in proj.picture_set.all | first %}
-					<img class="img-responsive" src="/media/{{ picture.address }}" alt="">
-				{% endfor %}
+					<img class="img-responsive" src="/media/{{ proj.picture_address }}" alt="">
 				</a>
 			</div>
 			<div class="col-md-5">
