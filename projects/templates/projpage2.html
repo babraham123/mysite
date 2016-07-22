@@ -14,7 +14,7 @@
 			<br>
 			<p>{{ proj.description }}</p>
 			<br>
-			<p>{{ proj.tech_skills }}</p>
+			<p>{{ proj.tech_skills | safe }}</p>
 			<br>
 
 			{% for link in proj.link_set.all %}
