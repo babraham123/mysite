@@ -18,7 +18,7 @@
 			<br>
 
 			{% for link in proj.link_set.all %}
-			<h3><a href="{{ link.address }}" target="_blank">{{ link.title }}</a></h3>
+			<h3><a href="{{ link.address }}" target="_blank">{{ link.title | safe}}</a></h3>
 			<br>
 			{% endfor %}
 
